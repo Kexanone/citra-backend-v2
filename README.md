@@ -14,7 +14,6 @@ bash entrypoint.sh
 ```
 
 Test query all rooms:
-
 ```sh
 > curl http://0.0.0.0:5000/lobby
 {"rooms": []}
@@ -22,6 +21,7 @@ Test query all rooms:
 
 ### Docker
 
+Setup:
 ```sh
 docker build -t citra-backend-v2 .
 docker run --rm -it \
