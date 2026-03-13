@@ -35,15 +35,6 @@ def get_user_from_header(request):
     
     return user
 
-def get_anonymous_user():
-    '''
-    Gets anonymous user or creates one if it doesn't exist yet
-    '''
-    try:
-        return User.objects.get(username='anonymous')
-    except User.DoesNotExist:
-        return User.objects.create_user(username='anonymous')
-
 class InternalTokenObtainView(APIView):
     '''
     Tries to get JWT for user from header
@@ -53,7 +44,7 @@ class InternalTokenObtainView(APIView):
         try:
             user = get_user_from_header(request)
         except AuthenticationFailed:
-            user = get_anonymous_user()
+            user = User.objects.get(username='anonymous')
 
         refresh = RefreshToken.for_user(user)
         return HttpResponse(refresh.access_token)
