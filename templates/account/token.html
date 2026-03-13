@@ -1,0 +1,26 @@
+{% extends "account/base_manage.html" %}
+{% block nav_class_token %}{{ block.super }} active{% endblock %}
+{% load i18n %}
+{% load allauth %}
+{% block head_title %}
+    {% trans "API Token" %}
+{% endblock head_title %}
+{% block content %}
+    {% element h1 %}
+        {% trans "Generate Token" %}
+    {% endelement %}
+    {% url 'generate_token' as token_url_ %}
+    <form class="card" action={{ token_url_ }} method="post">
+        <div class="card-body">
+            {% csrf_token %}
+            {% element p %}
+                {% trans 'Generate web API token to be set at <code>citra_token</code> in <code>qt-config.ini</code> and <code>--token</code> for <code>citra-room.exe</code>.' %}
+            {% endelement %}
+            <input type="text" class="form-control text-monospace" value="{{ token }}" readonly>
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirmGenerateToken">{% trans 'Generate Token' %}</button>
+            {% include "account/elements/confirm_button_modal.html" with modal_id="confirmGenerateToken" body="Do you really want to generate a new token? Your previous one will no longer be valid!" cancel="Cancel" confirm="Generate" %}
+        </div>
+    </form>
+{% endblock content %}

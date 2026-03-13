@@ -1,0 +1,9 @@
+django
+djangorestframework
+djangorestframework-simplejwt
+django-allauth
+psycopg2-binary
+APScheduler
+cryptography
+gunicorn
+Pillow

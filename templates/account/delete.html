@@ -1,0 +1,25 @@
+{% extends "account/base_manage.html" %}
+{% load allauth i18n %}
+{% block nav_class_delete_account %}{{ block.super }} fw-bold bg-danger text-white active{% endblock %}
+{% block head_title %}
+    {% trans "Delete Account" %}
+{% endblock head_title %}
+{% block content %}
+    {% element h1 %}
+        {% trans "Delete Account" %}
+    {% endelement %}
+    {% url 'delete_account' as action_url %}
+    {% element form method="post" action=action_url %}
+        {% slot body %}
+            {% csrf_token %}
+            {% element p %}
+                {% trans 'Do you want to delete your account?' %}
+            {% endelement %}
+        {% endslot %}
+        {% slot actions %}
+            <a href="javascript:history.back()" class="btn btn-secondary">{% trans 'Cancel' %}</a>
+            <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirmDelete">{% trans "Delete Account" %}</button>
+            {% include "account/elements/confirm_button_modal.html" with modal_id="confirmDelete" body="Are you sure you want to <b>permanently</b> delete your account?" cancel="Cancel" confirm="Delete" %}
+        {% endslot %}
+    {% endelement %}
+{% endblock content %}

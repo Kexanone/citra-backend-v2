@@ -1,0 +1,25 @@
+{% extends "account/base_manage.html" %}
+{% load i18n %}
+{% load allauth %}
+{% block nav_class_avatar %}{{ block.super }} active{% endblock %}
+{% block head_title %}
+    {% trans "Change Avatar" %}
+{% endblock head_title %}
+{% block content %}
+    {% element h1 %}
+        {% trans "Change Avatar" %}
+    {% endelement %}
+    {% url 'account_change_avatar' as action_url %}
+    <form class="card" action={{ action_url }} method="post" enctype="multipart/form-data">
+        <div class="card-body">
+            {% if form.instance.avatar %}
+                <img src="{{ form.instance.avatar_url }}" alt="Current Avatar" class="img-thumbnail" style="max-width: 200px;">
+            {% endif %}
+            {% csrf_token %}
+            {{ form }}
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+    </form>
+{% endblock content %}

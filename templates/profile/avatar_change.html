@@ -1,0 +1,35 @@
+{% extends "profile/base_manage_avatar.html" %}
+{% load i18n %}
+{% load allauth %}
+{% block head_title %}
+    {% trans "Change Avatar" %}
+{% endblock head_title %}
+{% block content %}
+    {% element h1 %}
+        {% trans "Change Avatar" %}
+    {% endelement %}
+    {% url 'account_change_avatar' as action_url %}
+    {% element form method="post" enctype="multipart/form-data" action=action_url %}
+        {% slot body %}
+            {% csrf_token %}
+            {% if user.profile.avatar %}
+                <div style="margin-bottom: 1rem;">
+                    {% slot label %}
+                        <strong>{% translate "Current avatar" %}:</strong><br>
+                        <img src="{{ user.profile.avatar.url }}" alt="Current Avatar" style="max-width: 150px; border-radius: 50%;">
+                    {% endslot %}
+                </div>
+            {% endif %}
+            {% element field id=form.avatar.auto_id name="avatar" type="file" errors=form.avatar.errors %}
+                {% slot label %}
+                    {% translate "Change to" %}:
+                {% endslot %}
+            {% endelement %}
+        {% endslot %}
+        {% slot actions %}
+            {% element button name="action_add" type="submit" %}
+                {% trans "Change Avatar" %}
+            {% endelement %}
+        {% endslot %}
+    {% endelement %}
+{% endblock content %}

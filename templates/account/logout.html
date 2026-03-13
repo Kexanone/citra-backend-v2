@@ -1,0 +1,23 @@
+{% extends "account/base_manage.html" %}
+{% load allauth i18n %}
+{% block head_title %}
+    {% trans "Sign Out" %}
+{% endblock head_title %}
+{% block content %}
+    {% element h1 %}
+        {% trans "Sign Out" %}
+    {% endelement %}
+    {% url 'account_logout' as action_url %}
+    {% element form method="post" action=action_url %}
+        {% slot body %}
+            {% csrf_token %}
+            {% element p %}
+                {% trans 'Are you sure you want to sign out?' %}
+            {% endelement %}
+        {% endslot %}
+        {% slot actions %}
+            <a href="javascript:history.back()" class="btn btn-secondary">{% trans 'Cancel' %}</a>
+            <button class="btn btn-danger" type="submit">{% trans "Sign Out" %}</button>
+        {% endslot %}
+    {% endelement %}
+{% endblock content %}

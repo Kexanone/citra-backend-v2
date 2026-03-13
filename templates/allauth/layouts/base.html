@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+{% load i18n %}
+<html lang="en" data-bs-theme="auto">
+    <link rel="shortcut icon" type="image/png" href="/static/favicon.png"/>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="generator" content="Hugo 0.118.2">
+        <title>
+            {% block head_title %}{% endblock %}
+        </title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+              rel="stylesheet"
+              integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+              crossorigin="anonymous">
+    </head>
+    <body class="min-vh-100 d-flex flex-shrink-0 flex-column">
+        <a class="visually-hidden-focusable" href="#content">{% translate "Skip to main content" %}</a>
+        <header data-bs-theme="dark">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">{{ hostname }}</a>
+                    <!--
+                    <button class="navbar-toggler"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#navbarText"
+                            aria-controls="navbarText"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarText">
+                        <ul role="navigation"
+                            aria-label="Project links"
+                            class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="https://docs.allauth.org/">Documentation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://codeberg.org/allauth/django-allauth">Repository</a>
+                            </li>
+                        </ul>
+                        <div class="d-flex flex-column flex-sm-row gap-2 col-lg-3 justify-content-lg-end text-nowrap">
+                            {% if user.is_authenticated %}
+                                <div class="d-flex align-items-center me-2">
+                                    <img src="{{ user.account.avatar_url }}" alt="Avatar"
+                                        class="rounded-circle me-2" style="width: 32px; height: 32px; object-fit: cover;">
+                                    <span class="fw-semibold">{{ user.username }}</span>
+                                </div>
+                                {% url 'account_change_avatar' as avatar_url_ %}
+                                {% url 'socialaccount_connections' as socialaccount_url_ %}
+                                {% if avatar_url_ or socialaccount_url_ %}
+                                    <a href="{% if avatar_url_ %}{{ avatar_url_ }}{% else %}{{ socialaccount_url_ }}{% endif %}"
+                                       class="btn btn-secondary">Manage Account</a>
+                                {% endif %}
+                                <a href="{% url 'account_logout' %}" class="btn btn-danger">{% translate "Sign Out" %}</a>
+                            {% else %}
+                                <a href="{% url 'account_login' %}" class="btn btn-outline-light">{% translate "Sign In" %}</a>
+                                {% url 'account_signup' as signup_url_ %}
+                                {% if signup_url_ %}
+                                    <a href="{{ signup_url_ }}" class="btn btn-success">{% translate "Sign Up" %}</a>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                     -->
+                    {% if user.is_authenticated %}
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle d-flex align-items-center gap-2 px-2 py-1"
+                                id="accountDropdown"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                                style="border: 1px solid #ced4da;
+                                border-radius: 999px;
+                                background-color: #ffffff;
+                                color: #212529;
+                                font-weight: 500;
+                                box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+                            {% if user.account.avatar %}
+                                <img src="{{ user.account.avatar_url }}" alt="Avatar"
+                                    class="rounded-circle" style="width: 32px; height: 32px; object-fit: cover;">
+                            {% endif %}
+                            <span class="fw-semibold">{{ user.username }}</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
+                            {% url 'account_change_avatar' as avatar_url_ %}
+                            {% url 'socialaccount_connections' as socialaccount_url_ %}
+                            {% if avatar_url_ or socialaccount_url_ %}
+                                <li>
+                                    <a class="dropdown-item" href="{% if avatar_url_ %}{{ avatar_url_ }}{% else %}{{ socialaccount_url_ }}{% endif %}">
+                                        Manage Account
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item text-danger" href="{% url 'account_logout' %}">Sign Out</a>
+                            </li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <div class="d-flex flex-column flex-sm-row gap-2 col-lg-3 justify-content-lg-end text-nowrap">
+                        <a href="{% url 'account_login' %}" class="btn btn-outline-light">{% translate "Sign In" %}</a>
+                        {% url 'account_signup' as signup_url_ %}
+                        {% if signup_url_ %}
+                            <a href="{{ signup_url_ }}" class="btn btn-success">{% translate "Sign Up" %}</a>
+                        {% endif %}
+                    </div>
+                {% endif %}
+                </div>
+            </nav>
+        </header>
+        {% block body %}
+            {% block content %}
+            {% endblock content %}
+        {% endblock body %}
+        {% block extra_body %}
+        {% endblock extra_body %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+                crossorigin="anonymous"></script>
+    </body>
+</html>
