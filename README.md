@@ -7,7 +7,7 @@ An unofficial Django-based backend for Citra web API
 Setup:
 ```sh
 pip install -r requirements.txt
-export ALLOWED_HOSTS=0.0.0.0
+export ALLOWED_HOSTS=localhost
 export INTERNAL_PORT=5000
 export DEBUG=true
 bash entrypoint.sh
@@ -15,7 +15,7 @@ bash entrypoint.sh
 
 Test query all rooms:
 ```sh
-> curl http://0.0.0.0:5000/lobby
+> curl http://localhost:5000/lobby
 {"rooms": []}
 ```
 
