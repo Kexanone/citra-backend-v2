@@ -1,5 +1,6 @@
 # Project-specific
 jwt_auth/keys/
+staticfiles/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
