@@ -5,7 +5,7 @@ An unofficial Django-based backend for Citra 3DS emulator web API
 ### Features
 
 - Registration and querying of lobbies at `/lobby`
-- Account registration and management at `/` (Should only be used with `HTTPS`)
+- Account registration and management at `/` (Requires `HTTPS`)
   - Setting avatars
   - Citra token generation (Associates users with accounts)
 
