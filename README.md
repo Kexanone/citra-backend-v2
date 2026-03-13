@@ -9,10 +9,10 @@ An unofficial Django-based backend for Citra 3DS emulator web API
   - Setting avatars
   - Citra token generation (Associates users with accounts)
 
-## Simple Usage
-### Directly
+## Usage
+### Simple Backend Setup with Debug
+#### Direct
 
-Setup:
 ```sh
 pip install -r requirements.txt
 export ALLOWED_HOSTS=localhost
@@ -21,15 +21,8 @@ export DEBUG=true
 bash entrypoint.sh
 ```
 
-Test query all rooms:
-```sh
-> curl http://localhost:5000/lobby
-{"rooms": []}
-```
+#### Docker
 
-### Docker
-
-Setup:
 ```sh
 docker build -t citra-backend-v2 .
 docker run --rm -it \
@@ -39,6 +32,31 @@ docker run --rm -it \
   -e DEBUG=true \
   -v "$(pwd)/jwt_auth/keys:/app/jwt_auth/keys" \
   citra-backend-v2
+```
+
+### Citra Configurations
+
+####  Citra Client
+
+Set URL in `qt-config.ini`:
+```ini
+web_api_url\default=false
+web_api_url=http://localhost:5000
+```
+
+#### Configure `citra-room`
+
+Pass URL as argument:
+```sh
+--web-api-url "http://localhost:5000"
+```
+
+### Testing
+#### Query All Rooms with `curl`
+
+```sh
+> curl http://localhost:5000/lobby
+{"rooms": []}
 ```
 
 ## Environment Variables
