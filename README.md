@@ -26,7 +26,7 @@ Setup:
 docker build -t citra-backend-v2 .
 docker run --rm -it \
   -p 5000:5000 \
-  -e ALLOWED_HOSTS=0.0.0.0 \
+  -e ALLOWED_HOSTS=localhost \
   -e INTERNAL_PORT=5000 \
   -e DEBUG=true \
   -v "$(pwd)/jwt_auth/keys:/app/jwt_auth/keys" \
