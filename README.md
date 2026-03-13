@@ -36,7 +36,7 @@ docker run --rm -it \
 
 ### Production Setup
 
-It is recommended to put the app behind a reverse proxy, such as nginx, configured with HTTPS. IP of the client should be forewarded via `X-Real-IP` proxy header.
+It is recommended to put the app behind a reverse proxy, such as nginx, configured with HTTPS. IP of the client should be forwarded via `X-Real-IP` proxy header.
 
 ### Citra Configurations
 
