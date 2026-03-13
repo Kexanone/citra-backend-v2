@@ -77,3 +77,4 @@ Pass URL as argument:
 | `DJANGO_LOG_LEVEL`     | `INFO`                               | Log level for Django logs.                                                        |
 | `LOBBY_LOG_LEVEL`      | `INFO`                               | Log level for the `lobby` app.                                                    |
 
+Extended Django configurations can be done in `core/settings.py`
