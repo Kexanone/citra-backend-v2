@@ -1,5 +1,13 @@
 # citra-backend-v2
+
 An unofficial Django-based backend for Citra web API
+
+### Features
+
+- Registration and querying of lobbies at `/lobby`
+- Account registration and management at `/` (Should only be used with `HTTPS`)
+  - Setting avatars
+  - Citra token generation (Associates users with accounts)
 
 ## Simple Usage
 ### Directly
@@ -44,9 +52,9 @@ docker run --rm -it \
 | `POSTGRES_DB`          | `""`                                 | PostgreSQL database name.                                                         |
 | `POSTGRES_USER`        | `""`                                 | PostgreSQL username.                                                              |
 | `POSTGRES_PASSWORD`    | `""`                                 | PostgreSQL password.                                                              |
-| `EMAIL_HOST`           | `""`                                 | SMTP host.                                                                        |
-| `EMAIL_ADDRESS`        | `""`                                 | SMTP username and default sender address.                                         |
-| `EMAIL_PASSWORD`       | `""`                                 | SMTP password.                                                                    |
+| `EMAIL_ADDRESS`        | `""`                                 | Email address used for sending mails for account recovery requests.               |
+| `EMAIL_PASSWORD`       | `""`                                 | Email account password.                                                           |
+| `EMAIL_HOST`           | `""`                                 | Host URL of email account.                                                        |
 | `DJANGO_LOG_FORMATTER` | `verbose`                            | Logging formatter for console output.                                             |
 | `DJANGO_LOG_LEVEL`     | `INFO`                               | Log level for Django logs.                                                        |
 | `LOBBY_LOG_LEVEL`      | `INFO`                               | Log level for the `lobby` app.                                                    |
