@@ -10,7 +10,7 @@ An unofficial Django-based backend for Citra 3DS emulator web API
   - Citra token generation (Associates users with accounts)
 
 ## Usage
-### Simple Backend Setup with Debug
+### Simple Test Setup
 #### Direct
 
 ```sh
@@ -33,6 +33,10 @@ docker run --rm -it \
   -v "$(pwd)/jwt_auth/keys:/app/jwt_auth/keys" \
   citra-backend-v2
 ```
+
+### Production Setup
+
+It is recommended to put the app behind a reverse proxy, such as nginx, configured with HTTPS. IP of the client should be forewarded via `X-Real-IP` proxy header.
 
 ### Citra Configurations
 
