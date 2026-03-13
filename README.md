@@ -1,6 +1,6 @@
 # citra-backend-v2
 
-An unofficial Django-based backend for Citra web API
+An unofficial Django-based backend for Citra 3DS emulator web API
 
 ### Features
 
