@@ -1,0 +1,22 @@
+line-length = 80
+src = ['.']
+
+[format]
+quote-style = 'single'
+skip-magic-trailing-comma = false
+
+[lint]
+preview = true
+select = [
+    'F',  # Pyflakes
+    'E',  # pycodestyle
+    'W',  # pycodestyle
+    'I',  # isort
+    'UP', # pyupgrade
+]
+ignore = [
+    'E741',  # ambiguous-variable-name
+    'W505',  # doc-line-too-long
+    'UP012', # unnecessary-encode-utf8
+    'UP015', # redundant-open-modes
+]
