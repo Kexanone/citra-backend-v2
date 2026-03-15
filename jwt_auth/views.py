@@ -38,14 +38,9 @@ def get_user_from_header(request):
 class InternalTokenObtainView(APIView):
     '''
     Tries to get JWT for user from header
-    If this fails, JWT for anonymous user is returned
     '''
     def post(self, request, *args, **kwargs):
-        try:
-            user = get_user_from_header(request)
-        except AuthenticationFailed:
-            user = User.objects.get(username='anonymous')
-
+        user = get_user_from_header(request)
         refresh = RefreshToken.for_user(user)
         return HttpResponse(refresh.access_token)
 
