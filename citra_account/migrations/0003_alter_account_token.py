@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('citra_account', '0002_account_token_alter_account_avatar'),
     ]

@@ -1,8 +1,9 @@
-from django.urls import path, include
+from django.urls import include, path
 from rest_framework.routers import DefaultRouter
+
 from .views import RoomViewSet
 
-router = DefaultRouter(trailing_slash = False)
+router = DefaultRouter(trailing_slash=False)
 # Temporary fix for older Citra versions
 # Allow POST to be used as PATCH
 router.routes[2].mapping['post'] = 'partial_update'

@@ -1,13 +1,16 @@
-from django.db import models
-from django.core.validators import MinValueValidator, MaxValueValidator
 from uuid import uuid4
+
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import models
 
 PORT_VALIDATORS = [MinValueValidator(1), MaxValueValidator(65535)]
 
+
 class Room(models.Model):
-    '''
+    """
     Model for a room in the DB
-    '''
+    """
+
     externalGuid = models.UUIDField(default=uuid4, editable=False, unique=True)
     address = models.GenericIPAddressField()
     port = models.IntegerField(validators=PORT_VALIDATORS)
@@ -22,10 +25,12 @@ class Room(models.Model):
     players = models.JSONField(blank=True, null=True)
     timestamp = models.BigIntegerField()
 
+
 class Player(models.Model):
-    '''
+    """
     Helper model for validating entries in "players" field
-    '''
+    """
+
     username = models.TextField(blank=True, null=True)
     avatarUrl = models.URLField(blank=True, null=True)
     nickname = models.TextField()

@@ -14,15 +14,17 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include, path
 from django.views.generic.base import RedirectView
 
 urlpatterns = [
     path('', RedirectView.as_view(url='/account/', permanent=False)),
     path('admin/', admin.site.urls),
     path('jwt/', include('jwt_auth.urls')),
-    # Full path has to be passed to lobby router for properly handling `trailing_slash = False`
+    # Full path has to be passed to lobby router for properly handling
+    # `trailing_slash = False`
     path('', include('lobby.urls')),
     path('account/', include('citra_account.urls')),
 ]

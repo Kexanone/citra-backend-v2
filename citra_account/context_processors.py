@@ -1,7 +1,7 @@
 def base(request):
-    '''
-    Contexts for 
-    '''
+    """
+    Contexts for
+    """
     return {
         'hostname': request.get_host(),
     }

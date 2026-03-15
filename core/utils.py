@@ -1,7 +1,7 @@
 def strtobool(val):
-    '''
+    """
     Converts string to boolean
-    '''
+    """
     val = val.lower()
     if val in ['y', 'yes', 't', 'true', 'on', '1']:
         return True

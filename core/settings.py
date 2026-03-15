@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 import os
 from pathlib import Path
+
 from .utils import strtobool
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,7 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-vq-@4=wc5ud2n81$dsg&kb_pr$ylly18q!j21s7957eftvnr9+')
+SECRET_KEY = os.environ.get(
+    'SECRET_KEY',
+    'django-insecure-vq-@4=wc5ud2n81$dsg&kb_pr$ylly18q!j21s7957eftvnr9+',
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = strtobool(os.environ.get('DEBUG', 'false'))
@@ -85,7 +89,7 @@ if DEBUG:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR /'db.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
 else:
@@ -105,16 +109,16 @@ else:
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',  # noqa: E501
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',  # noqa: E501
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',  # noqa: E501
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',  # noqa: E501
     },
 ]
 
@@ -136,7 +140,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -144,8 +148,11 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # SSL
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https') # Coming from nginx
-SECURE_SSL_REDIRECT = False # We allow HTTP for the old API link
+SECURE_PROXY_SSL_HEADER = (
+    'HTTP_X_FORWARDED_PROTO',
+    'https',
+)  # Coming from nginx
+SECURE_SSL_REDIRECT = False  # We allow HTTP for the old API link
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = [f'https://{host}' for host in ALLOWED_HOSTS]
@@ -156,7 +163,7 @@ LOGGING = {
     'formatters': {
         'verbose': {
             'format': '[%(levelname)s|%(asctime)s|%(name)s] %(message)s',
-            'datefmt' : '%Y-%m-%d %H:%M:%S',
+            'datefmt': '%Y-%m-%d %H:%M:%S',
         },
         'simple': {
             'format': '[%(levelname)s>] %(message)s',
@@ -184,7 +191,7 @@ LOGGING = {
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
-APPEND_SLASH  = True
+APPEND_SLASH = True
 LOGIN_URL = '/account/login/'
 LOGIN_REDIRECT_URL = '/account/'
 LOGOUT_REDIRECT_URL = '/'
@@ -215,7 +222,7 @@ SIMPLE_JWT = {
     'ALGORITHM': 'RS256',
     'SIGNING_KEY': _jwt_private_key,
     'VERIFYING_KEY': _jwt_public_key,
-    'ISSUER': 'citra-core'
+    'ISSUER': 'citra-core',
 }
 
 # Room settings
@@ -231,6 +238,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST', '')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER =  os.environ.get('EMAIL_ADDRESS', '')
+EMAIL_HOST_USER = os.environ.get('EMAIL_ADDRESS', '')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD', '')
 DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_ADDRESS', '')
