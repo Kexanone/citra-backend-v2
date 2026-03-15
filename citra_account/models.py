@@ -84,7 +84,7 @@ def get_user_from_token(prefixed_token):
 
     try:
         prefixed_token = urlsafe_b64decode(prefixed_token).decode('utf-8')
-    except binascii.Error:
+    except (binascii.Error, UnicodeDecodeError):
         return
 
     try:
