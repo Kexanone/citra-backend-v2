@@ -221,6 +221,9 @@ SIMPLE_JWT = {
 # Room settings
 MAX_ROOM_UPDATE_TIMEOUT_S = 60
 
+# Citra account settings
+MAX_AVATAR_IMAGE_SIZE = 64
+
 # E-mail settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 

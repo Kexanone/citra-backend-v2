@@ -1,12 +1,12 @@
 from django.forms import ModelForm
 from django.core.files.base import ContentFile
 from django.contrib.auth.models import User
+from django.conf import settings
 from .models import Account
 from io import BytesIO
 from pathlib import Path
 from PIL import Image
 
-MAX_IMAGE_SIZE = 64
 
 class ChangeAvatarForm(ModelForm):
     '''
@@ -31,8 +31,8 @@ class ChangeAvatarForm(ModelForm):
         with Image.open(avatar) as image:
             width, height = image.size
 
-            if width > MAX_IMAGE_SIZE or height > MAX_IMAGE_SIZE:
-                image.thumbnail((MAX_IMAGE_SIZE, MAX_IMAGE_SIZE), Image.LANCZOS)
+            if width > settings.MAX_AVATAR_IMAGE_SIZE or height > settings.MAX_AVATAR_IMAGE_SIZE:
+                image.thumbnail((settings.MAX_AVATAR_IMAGE_SIZE, settings.MAX_AVATAR_IMAGE_SIZE), Image.LANCZOS)
 
             if image.mode != 'RGBA':
                 image = image.convert('RGBA')
