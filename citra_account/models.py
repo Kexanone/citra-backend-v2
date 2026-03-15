@@ -4,7 +4,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.conf import settings
 from .storages import OverwriteStorage
 from pathlib import Path
-from secrets import token_bytes
+from secrets import token_urlsafe
 from base64 import urlsafe_b64encode, urlsafe_b64decode
 import binascii
 
@@ -65,39 +65,39 @@ def generate_token(user):
     except Account.DoesNotExist:
         return
 
-    token = token_bytes(32)
+    token = token_urlsafe(32)
     account.token = make_password(token)
     account.save()
-    prefix = user.username.encode('utf-8')
-    token = urlsafe_b64encode(b':'.join([prefix, token]))
+    prefixed_token = f'{user.username}:{token}'.encode('utf-8')
+    prefixed_token = urlsafe_b64encode(prefixed_token)
     # Remove padding
-    token = token.rstrip(b'=')
-    return token.decode('utf-8')
+    prefixed_token = prefixed_token.rstrip(b'=')
+    return prefixed_token.decode('utf-8')
 
-def get_user_from_token(token):
+def get_user_from_token(prefixed_token):
     '''
     Returns user from API token or None on failure
     '''
-    token = token.encode('utf-8')
+    prefixed_token = prefixed_token.encode('utf-8')
     # Add max possible patting
-    token += b'=='
+    prefixed_token += b'=='
 
     try:
-        token = urlsafe_b64decode(token)
+        prefixed_token = urlsafe_b64decode(prefixed_token).decode('utf-8')
     except binascii.Error:
         return
 
     try:
-        (username, token) = token.split(b':', maxsplit=1)
+        (username, token) = prefixed_token.split(':', maxsplit=1)
     except ValueError:
         return
 
     try:
-        user = User.objects.get(username=username.decode('utf-8'))
+        user = User.objects.get(username=username)
     except User.DoesNotExist:
         return
 
     if check_password(token, user.account.token):
         return user
-    
+
     return
