@@ -50,9 +50,10 @@ web_api_url=http://localhost:5000
 
 #### Configure `citra-room`
 
-Pass URL as argument:
+Pass URL as argument and generated token:
 ```sh
 --web-api-url "http://localhost:5000"
+--token VGVzdDpXT1NPMEtYZHluOXkJWGVvQm5ETnSGMEFHVU3hbl9tTDZhZFhqanJsdk71
 ```
 
 ### Testing
