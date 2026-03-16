@@ -23,7 +23,7 @@ class Room(models.Model):
     netVersion = models.IntegerField()
     hasPassword = models.BooleanField()
     players = models.JSONField(blank=True, null=True)
-    timestamp = models.BigIntegerField()
+    timestamp = models.BigIntegerField(db_index=True)
 
 
 class Player(models.Model):
